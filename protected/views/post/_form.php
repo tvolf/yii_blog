@@ -38,6 +38,23 @@
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'category'); ?>
+
+
+<?php
+     $categories_list = CHtml::listData(Category::model()->findAll(), 'id', 'name');
+$options = array(
+        'tabindex' => '0',
+        'empty' => '(not set)',
+);
+?>
+<?php echo $form->dropDownList($model,'category_id', $categories_list, $options); ?>
+
+		<?php echo $form->error($model,'category_id'); ?>
+	</div>
+
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
