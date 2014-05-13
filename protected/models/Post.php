@@ -49,8 +49,8 @@ class Post extends CActiveRecord
 			array('title', 'length', 'max'=>128),
 			array('tags', 'match', 'pattern'=>'/^[\w\s,]+$/', 'message'=>'Tags can only contain word characters.'),
 			array('tags', 'normalizeTags'),
-
-			array('title, status', 'safe', 'on'=>'search'),
+			array('category_id', 'safe'),
+			array('title, status, category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +63,7 @@ class Post extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+			'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 			'comments' => array(self::HAS_MANY, 'Comment', 'post_id', 'condition'=>'comments.status='.Comment::STATUS_APPROVED, 'order'=>'comments.create_time DESC'),
 			'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition'=>'status='.Comment::STATUS_APPROVED),
 		);
@@ -81,6 +82,7 @@ class Post extends CActiveRecord
 			'status' => 'Status',
 			'create_time' => 'Create Time',
 			'update_time' => 'Update Time',
+			'category_id' => 'Category',
 			'author_id' => 'Author',
 		);
 	}
@@ -191,6 +193,8 @@ class Post extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 
 		$criteria->compare('status',$this->status);
+
+		$criteria->compare('category_id',$this->category_id);
 
 		return new CActiveDataProvider('Post', array(
 			'criteria'=>$criteria,

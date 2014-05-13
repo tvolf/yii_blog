@@ -5,6 +5,13 @@
 	<div class="author">
 		posted by <?php echo $data->author->username . ' on ' . date('F j, Y',$data->create_time); ?>
 	</div>
+ <?php 
+	$category = is_null($data->category) ? 'не установлена' : $data->category->name; 
+?>
+	<div class="author">
+                category:  <?php echo $category; ?>
+	</div>
+
 	<div class="content">
 		<?php
 			$this->beginWidget('CMarkdown', array('purifyOutput'=>true));

@@ -20,6 +20,11 @@ $this->breadcrumbs=array(
 			'filter'=>Lookup::items('PostStatus'),
 		),
 		array(
+			'name'=>'category_id',
+			'value'=> 'is_null($data->category) ? "не установлено" : $data->category->name',
+			'filter'=> CHtml::listData(Category::model()->findAll(), 'id', 'name')		
+		),
+		array(
 			'name'=>'create_time',
 			'type'=>'datetime',
 			'filter'=>false,

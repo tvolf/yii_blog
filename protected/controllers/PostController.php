@@ -141,6 +141,7 @@ class PostController extends Controller
 	 */
 	public function actionAdmin()
 	{
+
 		$model=new Post('search');
 		if(isset($_GET['Post']))
 			$model->attributes=$_GET['Post'];

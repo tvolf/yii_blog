@@ -44,14 +44,12 @@
 
 <?php
      $categories_list = CHtml::listData(Category::model()->findAll(), 'id', 'name');
-$options = array(
-        'tabindex' => '0',
-        'empty' => '(not set)',
-);
+     $options = array(
+		      'empty' => 'Не установлено'
+		      );
+     echo $form->dropDownList($model, 'category_id', $categories_list, $options); 
 ?>
-<?php echo $form->dropDownList($model,'category_id', $categories_list, $options); ?>
-
-		<?php echo $form->error($model,'category_id'); ?>
+<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
 
